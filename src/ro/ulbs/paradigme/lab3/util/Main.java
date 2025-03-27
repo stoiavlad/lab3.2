@@ -5,6 +5,7 @@ public class Main {
         PasswordMaker pm = PasswordMaker.getInstance();
         pm.setName("JohnDoe");
         System.out.println("Generated Password: " + pm.getPassword());
+        System.out.println("Instance accessed: " + PasswordMaker.getAccessCount() + " times");
 
     }
 }

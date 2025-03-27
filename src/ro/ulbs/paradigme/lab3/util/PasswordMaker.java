@@ -1,4 +1,5 @@
 package ro.ulbs.paradigme.lab3.util;
+
 import java.security.SecureRandom;
 import java.util.Random;
 
@@ -7,6 +8,7 @@ public class PasswordMaker {
     private static final String magicString = StringRandomizer.getRandomString(20);
     private static final PasswordMaker instance;
     private String name;
+    private static int accessCount = 0;
 
     static {
         instance = new PasswordMaker("default");
@@ -17,6 +19,7 @@ public class PasswordMaker {
     }
 
     public static PasswordMaker getInstance() {
+        accessCount++;
         return instance;
     }
 
@@ -33,4 +36,7 @@ public class PasswordMaker {
         return randomPart1 + randomPart2 + nameLength + randomNumber;
     }
 
+    public static int getAccessCount() {
+        return accessCount;
+    }
 }
