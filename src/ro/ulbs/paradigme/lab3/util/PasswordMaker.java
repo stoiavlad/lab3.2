@@ -3,12 +3,24 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 public class PasswordMaker {
-    private static final int MAGIC_NUMBER = new SecureRandom().nextInt(6) + 5; // între 5 și 10
+    private static final int MAGIC_NUMBER = new SecureRandom().nextInt(6) + 5;
     private static final String magicString = StringRandomizer.getRandomString(20);
-    private static PasswordMaker instance;
-    private final String name;
+    private static final PasswordMaker instance;
+    private String name;
+
+    static {
+        instance = new PasswordMaker("default");
+    }
 
     private PasswordMaker(String name) {
+        this.name = name;
+    }
+
+    public static PasswordMaker getInstance() {
+        return instance;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -20,10 +32,5 @@ public class PasswordMaker {
 
         return randomPart1 + randomPart2 + nameLength + randomNumber;
     }
-    public static PasswordMaker getInstance(String name) {
-        if (instance == null) {
-            instance = new PasswordMaker(name);
-        }
-        return instance;
-    }
+
 }
